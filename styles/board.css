@@ -5,6 +5,12 @@
   margin: 48px;
 }
 
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .board-section header {
   display: flex;
   align-items: center;
