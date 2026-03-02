@@ -1,4 +1,4 @@
-.contacts-main {
+.contacts {
   display: flex;
 }
 
@@ -17,4 +17,33 @@
   width: 352px;
   height: 56px;
   border-radius: 10px;
+
+  padding: 12px 0;
+}
+
+.contact {
+  padding: 15px 24px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.contact-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.contact .name {
+  font-size: 20px;
+}
+
+.contact .email {
+  font-size: 16px;
+  color: #007cee;
 }
