@@ -45,7 +45,7 @@
     />
     <link rel="manifest" href="../assets/favicon/site.webmanifest" />
   </head>
-  <body>
+  <body onload="init()">
     <aside>
       <img src="../assets/imgs/join-logo-white.png" alt="logo" class="logo" />
       <nav class="side-nav">
@@ -77,8 +77,13 @@
           <button class="button profil-button">SM</button>
         </nav>
       </header>
-      <section>
-        <h1>Test</h1>
+      <section class="contacts">
+        <aside class="contact-list">
+          <button>Add new contact</button>
+          <div id="contacts-list"></div>
+        </aside>
+        <h1>Contacts</h1>
+        <p>Better with a team</p>
       </section>
     </main>
   </body>
