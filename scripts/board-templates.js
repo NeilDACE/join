@@ -6,9 +6,8 @@ function toDoTaskTemplate(task) {
             <h3 class="card-title">${task.title}</h3>
             <p class="card-description">${task.description}</p>
 
-            ${
-              task.hasSubtasks
-                ? `
+            ${task.hasSubtasks
+      ? `
                 <div class="progress-container" title="${task.subtaskInfo}">
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: ${task.progressWidth}%"></div>
@@ -16,8 +15,8 @@ function toDoTaskTemplate(task) {
                     <span class="subtask-count">${task.subtaskInfo}</span>
                 </div>
             `
-                : ""
-            }
+      : ""
+    }
 
             <div class="card-footer">
                 <div class="badges">${task.badgesHtml}</div>
@@ -147,34 +146,47 @@ function editTaskTemplate(task) {
           <div class="edit-container date">
             <label class="detail-label" for="due-date">Due date</label>
             <div class="input-wrapper">
-              <input
-                type="text"
-                id="due-date"
-                value="${transformDate(task)}"
-                placeholder="DD/MM/YYYY"
-              />
-              <button class="calendar-icon">
-                <img src="../assets/imgs/event.png" alt="calender icon" />
-              </button>
-            </div>
+<div class="date-input-wrapper">
+  <input
+    type="date"
+    id="due-date"
+    value="${task.due_date}"
+    ondblclick="setEditTodayDate()"
+    onkeydown="return false"
+  />
+  <img src="../assets/imgs/event.png" onclick="openDatePicker('due-date')" />
+</div>
           </div>
 
-          <div class="edit-container priority">
-            <span class="detail-label priority-label">Priority</span>
-            <div class="priority-options"> 
-              <button id="urgent-btn" class="urgent-btn">
-                Urgent
-                <img src="../assets/imgs/prio-high.png" alt="Urgent icon" />
-              </button>
-              <button id="medium-btn" class="medium-btn">
-                Medium
-                <img src="../assets/imgs/prio-medium.png" alt="Medium icon" />
-              </button>
-              <button id="low-btn" class="low-btn">
-                Low <img src="../assets/imgs/prio-low.png" alt="Low icon" />
-              </button>
-            </div>
-          </div>
+          <div class="field">
+  <label class="label">Priority</label>
+
+  <div class="prio-row">
+    <button id="urgent-btn" type="button" class="prio-btn prio-urgent ${getEditPriorityActiveClass(task.priority, 'urgent')}">
+      Urgent
+      <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 14l5-5 5 5" />
+        <path d="M7 19l5-5 5 5" />
+      </svg>
+    </button>
+
+    <button id="medium-btn" type="button" class="prio-btn prio-medium ${getEditPriorityActiveClass(task.priority, 'medium')}">
+      Medium
+      <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 10h10" />
+        <path d="M7 14h10" />
+      </svg>
+    </button>
+
+    <button id="low-btn" type="button" class="prio-btn prio-low ${getEditPriorityActiveClass(task.priority, 'low')}">
+      Low
+      <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 10l5 5 5-5" />
+        <path d="M7 5l5 5 5-5" />
+      </svg>
+    </button>
+  </div>
+</div>
 
           <div class="edit-container date">
             <label class="detail-label" for="assignedSelect">Assigned to</label>
@@ -191,26 +203,38 @@ function editTaskTemplate(task) {
           </div>
 
           <div class="edit-container date">
-            <span class="detail-label">Subtasks</span>
-            <input
-              type="text"
-              class="edit-subtask-input"
-              placeholder="Add new subtask"
-            />
-            <div class="subtasks-container">
-              <ul class="edit-subtasks-list">
-                <li>Implement Recipe Recommendation</li>
-                <li>Start Page Layout</li>
-              </ul>
-            </div>
+            <label class="detail-label" for="subtask">Subtasks</label>
+                <div class="subtask-input">
+                  <input
+                    id="subtask"
+                    type="text"
+                    placeholder="Add new subtask"
+                    class="input"
+                  />
+
+                  <div class="subtask-actions">
+                    <svg class="subtask-icon" viewBox="0 0 24 24">
+                      <path d="M6 6L18 18M6 18L18 6" />
+                    </svg>
+
+                    <div class="divider"></div>
+
+                    <svg class="subtask-icon" viewBox="0 0 24 24">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="subtasks-list" id="subtasksList"></div>
           </div>
+          
           </div>
 
           <div class="detail-footer">
-            <button
-              onclick="#"
-              class="primary-btn edit-button"
-            >
+  <button
+  type="button"
+  onclick="saveEditedTask('${task.id}')"
+  class="primary-btn edit-button"
+>
               Ok
               <img
                 class="check-img"
@@ -220,4 +244,11 @@ function editTaskTemplate(task) {
             </button>
           </div>
         </div>`;
+}
+
+function getEditPriorityActiveClass(taskPriority, buttonPriority) {
+  if (taskPriority === buttonPriority) {
+    return "is-active";
+  }
+  return "";
 }
