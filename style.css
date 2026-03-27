@@ -170,10 +170,6 @@ header {
         display: none;
     }
 
-    .board-section {
-        display: none !important;
-    }
-
     body  {
         flex-direction: column-reverse;
     }
