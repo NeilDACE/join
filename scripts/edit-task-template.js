@@ -55,7 +55,7 @@ function editTaskTemplate(task) {
     <button
       type="button"
       id="urgent-btn"
-      class="prio-btn high-btn ${getEditPriorityActiveClass(task.priority, 'urgent')}"
+      class="prio-btn high-btn ${getEditPriorityActiveClass(task.priority, "urgent")}"
     >
       Urgent
       <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -67,7 +67,7 @@ function editTaskTemplate(task) {
     <button
       type="button"
       id="medium-btn"
-      class="prio-btn medium-btn ${getEditPriorityActiveClass(task.priority, 'medium')}"
+      class="prio-btn medium-btn ${getEditPriorityActiveClass(task.priority, "medium")}"
     >
       Medium
       <img src="../assets/imgs/prio-medium.png" alt="Medium icon" />
@@ -76,7 +76,7 @@ function editTaskTemplate(task) {
     <button
       type="button"
       id="low-btn"
-      class="prio-btn low-btn ${getEditPriorityActiveClass(task.priority, 'low')}"
+      class="prio-btn low-btn ${getEditPriorityActiveClass(task.priority, "low")}"
     >
       Low
       <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -91,7 +91,7 @@ function editTaskTemplate(task) {
             <div class="custom-select" id="assignedSelect">
                 <div class="select-trigger">
                   <span class="trigger-text">Select contacts to assign</span>
-                  <img class="trigger-arrow" src="../assets/imgs/arrow_drop_downaa.png" alt="">
+                  <img class="trigger-arrow" src="../assets/imgs/arrow_drop_downaa.png" alt="Open assigned contacts dropdown">
                 </div>
 
                 <div class="select-dropdown" id="assignedDropdown"></div>
@@ -129,7 +129,7 @@ function editTaskTemplate(task) {
 
           <div class="detail-footer">
             <button
-              onclick="saveEditedTask('${task.id}')"
+              onclick="saveEditedTask('${task.firebaseKey}')"
               class="primary-btn edit-button"
             >
               Ok
