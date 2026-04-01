@@ -37,13 +37,22 @@ function editTaskTemplate(task) {
   <div class="date-input-container">  
     <div class="date-input-wrapper">
       <input
-        type="date"
+        type="text"
         id="due-date"
-        value="${task.due_date}"
+        value="${formatEditDateForDisplay(task.due_date)}"
         class="input date-input"
-        onkeydown="return false"
+        placeholder="dd/mm/yyyy"
+        oninput="syncEditPickerFromInput()"
       />
-      <img src="../assets/imgs/event.png" onclick="openDatePicker('due-date')" />
+      <input
+        type="date"
+        id="due-date-picker"
+        class="edit-date-picker"
+        value="${task.due_date}"
+        onchange="syncEditDateFromPicker()"
+        tabindex="-1"
+      />
+      <img src="../assets/imgs/event.png" onclick="openEditDatePicker()" />
     </div>
     <p class="feedback-message" id="dueDateFeedback">this field is required</p>
   </div>
@@ -141,6 +150,22 @@ function editTaskTemplate(task) {
             </button>
           </div>
         </div>`;
+}
+
+function buildEditAssignedContactOptionHTML(index) {
+  let contact = contacts[index];
+  let fullName = contact.firstName + " " + contact.lastName;
+  let contactId = contact.firebaseKey;
+  let isSelected = isAssignedContactSelected(contactId);
+  return `
+    <div class="select-option${getAssignedOptionClass(isSelected)}" data-id="${contactId}">
+        <div class="contact-info">
+            <div class="avatar" style="background:${contact.badgeColor}">${getContactInitials(contact)}</div>
+            <span>${fullName}</span>
+        </div>
+        <input type="checkbox"${getAssignedCheckboxState(isSelected)}>
+    </div>
+    `;
 }
 
 function getEditPriorityActiveClass(taskPriority, buttonPriority) {
