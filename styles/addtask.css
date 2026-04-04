@@ -44,7 +44,7 @@ body {
   gap: 6px;
 }
 
-.field+.field {
+.field + .field {
   margin-top: 0;
 }
 
@@ -70,7 +70,7 @@ body {
 
 .label {
   font-size: 14px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .req {
@@ -136,7 +136,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 12px 16px;
   font-family: inherit;
   font-size: 16px;
-  color: #2A3647;
+  color: #2a3647;
   background: #fff;
 }
 
@@ -151,7 +151,7 @@ textarea::placeholder {
 .input:focus,
 .textarea:focus {
   outline: none;
-  border: 1px solid #29ABE2;
+  border: 1px solid #29abe2;
 }
 
 .date-icon-right {
@@ -184,12 +184,17 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: #2A3647;
+  color: #2a3647;
   font-size: 16px;
   font-weight: 500;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
 }
 
 .addtask .prio-btn:not(.is-active):hover {
@@ -263,7 +268,7 @@ textarea::placeholder {
 .select-trigger {
   border: 1px solid #e6e8ee;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 11px 14px;
   background: #fff;
   display: flex;
   justify-content: space-between;
@@ -272,18 +277,17 @@ textarea::placeholder {
 }
 
 .select-trigger:focus-visible {
-  outline: 2px solid #29ABE2;
+  outline: 2px solid #29abe2;
   outline-offset: 2px;
 }
 
 .custom-select.open .select-trigger {
-  border-color: #29ABE2;
+  border-color: #29abe2;
 }
 
 .trigger-arrow {
-  width: 27px;
-  height: 27px;
-  opacity: .7;
+  width: 24px;
+  height: 24px;
   transition: transform 0.15s ease;
 }
 
@@ -304,6 +308,7 @@ textarea::placeholder {
   position: absolute;
   top: calc(100% + 0px);
   left: 0;
+  gap: 2px;
   width: 100%;
   background: #fff;
   border-radius: 12px;
@@ -316,7 +321,8 @@ textarea::placeholder {
 }
 
 .custom-select.open .select-dropdown {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .select-option {
@@ -334,7 +340,7 @@ textarea::placeholder {
 }
 
 .select-option.active {
-  background: #2A3647;
+  background: #2a3647;
   color: #ffffff;
 }
 
@@ -379,12 +385,12 @@ textarea::placeholder {
 }
 
 .assigned-badge {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
+  border: solid 2px white;
   border-radius: 50%;
   color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -420,17 +426,8 @@ textarea::placeholder {
 }
 
 .subtask-icon {
-  width: 27px;
-  height: 27px;
-  stroke: #2A3647;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 50%;
-  transition: background 0.15s ease;
+  width: 24px;
+  height: 24px;
 }
 
 .subtask-icon:hover {
@@ -448,12 +445,22 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: 10px;
+  padding: 4px 16px;
 }
 
 .subtask-item:hover {
-  background: #eeeeee;
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+.subtask-item.edit-mode {
+  background: white;
+  border-radius: 0;
+}
+
+.edit-mode {
+  background: white;
+  border-bottom: solid 1px rgba(0, 93, 255, 1);
 }
 
 .subtask-left {
@@ -470,24 +477,23 @@ textarea::placeholder {
 
 .subtask-text {
   font-size: 16px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .subtask-edit-input {
+  font-family: "Inter Variable", sans-serif;
   width: 100%;
+  padding: 0;
   border: none;
   outline: none;
-  background: transparent;
   font-size: 16px;
-  color: #2A3647;
-  border-bottom: 1px solid #29ABE2;
-  padding-bottom: 2px;
+  color: #2a3647;
 }
 
 .subtask-item-actions {
   display: none;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .subtask-item:hover .subtask-item-actions {
@@ -498,22 +504,28 @@ textarea::placeholder {
   display: flex;
 }
 
-.subtask-action-icon {
-  width: 12px;
-  height: 12px;
-  cursor: pointer;
+.subtask-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: 0.1s ease;
+}
+
+.subtask-btn:hover {
+  background-color: var(--secondary-color);
+  border-radius: 50%;
 }
 
 .subtask-item-divider {
-  width: 1px;
-  height: 18px;
-  background: #d1d1d1;
+  border: 1px rgba(168, 168, 168, 1) solid;
+  height: 24px;
 }
 
 .divider {
-  width: 1px;
-  height: 18px;
-  background: #e6e8ee;
+  border: 1px rgba(168, 168, 168, 1) solid;
+  height: 24px;
 }
 
 .addtask-foot {
@@ -527,7 +539,7 @@ textarea::placeholder {
 
 .required-hint {
   font-size: 12px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .addtask-actions {
@@ -549,7 +561,7 @@ textarea::placeholder {
   gap: 12px;
 }
 
-.field+.field {
+.field + .field {
   margin-top: 6px;
 }
 
@@ -569,7 +581,7 @@ textarea::placeholder {
   width: 326px;
   max-width: calc(100% - 32px);
   height: 76px;
-  background: #2A3647;
+  background: #2a3647;
   color: white;
   border-radius: 20px;
   display: flex;
@@ -579,7 +591,9 @@ textarea::placeholder {
   font-size: 20px;
   font-weight: 500;
   opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
   z-index: 999;
 }
 

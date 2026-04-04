@@ -1,7 +1,7 @@
 function editTaskTemplate(task) {
   return `<div
           class="task-card-detail edit-dialog"
-          onclick="event.stopPropagation()"
+          onclick="closeAllSelects(); event.stopPropagation()"
         >
           <div class="detail-header edit-header">
             <button class="close-btn" onclick="closeTaskDialog()">
@@ -23,7 +23,7 @@ function editTaskTemplate(task) {
             <div class="textarea-container">
                 <textarea
                   id="task-desc"
-                  class="textarea edit-textarea"
+                  class="edit-textarea"
                   rows="4"
                   placeholder="Enter description..."
                   maxlength="250"
@@ -35,12 +35,12 @@ function editTaskTemplate(task) {
 <div class="edit-container date">
   <label class="detail-label" for="due-date">Due date</label>
   <div class="date-input-container">  
-    <div class="date-input-wrapper">
+    <div class="input-wrapper">
       <input
         type="text"
         id="due-date"
         value="${formatEditDateForDisplay(task.due_date)}"
-        class="input date-input"
+        class="input edit-input"
         placeholder="dd/mm/yyyy"
         oninput="syncEditPickerFromInput()"
       />
@@ -52,25 +52,24 @@ function editTaskTemplate(task) {
         onchange="syncEditDateFromPicker()"
         tabindex="-1"
       />
-      <img src="../assets/imgs/event.png" onclick="openEditDatePicker()" />
+      <button type="button" class="date-picker-btn" onclick="openEditDatePicker()">
+        <img src="../assets/imgs/event.png" alt="date picker icon" />
+      </button>
     </div>
     <p class="feedback-message" id="dueDateFeedback">this field is required</p>
   </div>
 </div>
           </section>
 <div class="edit-container priority">
-  <span class="detail-label priority-label">Priority</span>
+  <span class="detail-label">Priority</span>
   <div class="priority-options">
     <button
       type="button"
       id="urgent-btn"
       class="prio-btn high-btn ${getEditPriorityActiveClass(task.priority, "urgent")}"
     >
-      Urgent
-      <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M7 14l5-5 5 5" />
-        <path d="M7 19l5-5 5 5" />
-      </svg>
+      <span>Urgent</span>
+      ${getPriorityIcon("urgent")}
     </button>
 
     <button
@@ -78,8 +77,8 @@ function editTaskTemplate(task) {
       id="medium-btn"
       class="prio-btn medium-btn ${getEditPriorityActiveClass(task.priority, "medium")}"
     >
-      Medium
-      <img src="../assets/imgs/prio-medium.png" alt="Medium icon" />
+      <span>Medium</span>
+      ${getPriorityIcon("medium")}
     </button>
 
     <button
@@ -87,18 +86,15 @@ function editTaskTemplate(task) {
       id="low-btn"
       class="prio-btn low-btn ${getEditPriorityActiveClass(task.priority, "low")}"
     >
-      Low
-      <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M7 10l5 5 5-5" />
-        <path d="M7 5l5 5 5-5" />
-      </svg>
+      <span>Low</span>
+      ${getPriorityIcon("low")}
     </button>
   </div>
 </div>
           <div class="edit-container date">
             <label class="detail-label" for="assignedSelect">Assigned to</label>
             <div class="custom-select" id="assignedSelect">
-                <div class="select-trigger">
+                <div class="select-trigger edit-select-trigger">
                   <span class="trigger-text">Select contacts to assign</span>
                   <img class="trigger-arrow" src="../assets/imgs/arrow_drop_downaa.png" alt="Open assigned contacts dropdown">
                 </div>
@@ -120,15 +116,14 @@ function editTaskTemplate(task) {
                   />
 
                   <div class="subtask-actions">
-                    <svg class="subtask-icon" viewBox="0 0 24 24">
-                      <path d="M6 6L18 18M6 18L18 6" />
-                    </svg>
+                    <button type="button" class="subtask-btn">
+                    ${cancelIcon()}
+                    </button>
 
                     <div class="divider"></div>
-
-                    <svg class="subtask-icon" viewBox="0 0 24 24">
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
+                    <button type="button" class="subtask-btn">
+                    ${checkIcon()}
+                    </button>
                   </div>
                 </div>
                 <div class="subtasks-list" id="subtasksList"></div>
@@ -142,11 +137,7 @@ function editTaskTemplate(task) {
               class="primary-btn edit-button"
             >
               Ok
-              <img
-                class="check-img"
-                src="../assets/imgs/check-white.svg
-              "
-              />
+              ${editCheckIcon()}
             </button>
           </div>
         </div>`;
