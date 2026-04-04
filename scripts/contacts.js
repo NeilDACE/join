@@ -52,15 +52,15 @@ DOM.dialogEl.onclick = (event) => {
   }
 };
 DOM.contactNameEl.addEventListener("input", () => {
-  DOM.warningMessageNameEl.innerHTML = "";
+  DOM.warningMessageNameEl.textContent = "";
 });
 
 DOM.contactEmailEl.addEventListener("input", () => {
-  DOM.warningMessageEmailEl.innerHTML = "";
+  DOM.warningMessageEmailEl.textContent = "";
 });
 
 DOM.contactPhoneEl.addEventListener("input", () => {
-  DOM.warningMessagePhoneEl.innerHTML = "";
+  DOM.warningMessagePhoneEl.textContent = "";
 });
 
 /**
@@ -80,16 +80,6 @@ async function init() {
 }
 
 /**
- * Fetches the contacts data from the backend and populates the contacts array. Then calls the function to render the contacts list.
- * @param {void}
- * @returns {Promise<void>}
- */
-async function getContacts() {
-  let data = await fetchData("contacts");
-  makeArray(data);
-}
-
-/**
  * Renders the contacts list by sorting the contacts alphabetically, grouping them by the first letter of their first name, and generating the HTML for each contact using templates. The generated HTML is then inserted into the DOM to display the contacts list.
  * @param {void}
  * @returns {void}
@@ -106,7 +96,7 @@ function renderContactsList() {
       lastLetter = letter;
       contactListString += contactLetterTemplate(letter);
     }
-    contactListString += contactTemplate(i);
+    contactListString += contactTemplate(findContact(contacts[i].firebaseKey));
   }
   DOM.contactsListEl.innerHTML = contactListString;
 }
@@ -127,33 +117,35 @@ function renderContactMain() {
  * @param {number} index - The index of the contact to render.
  * @returns {void}
  */
-function renderContact(index) {
+function renderContact(firebaseKey) {
+  const contact = findContact(firebaseKey);
+  if (!contact) return;
   if (isMobileView()) {
-    renderContactMobile(index);
+    renderContactMobile(contact);
   } else {
-    renderContactDesktop(index);
+    renderContactDesktop(contact);
   }
 }
 
 /**
  * Renders the contact details view for desktop by inserting the appropriate HTML template into the DOM. This function is called when a contact is selected in the desktop view to display the contact's details in the overview section.
- * @param {number} index - The index of the contact to render.
+ * @param {number} contact - The index of the contact to render.
  * @returns {void}
  */
-function renderContactDesktop(index) {
-  DOM.contactOverviewEl.innerHTML = contactDetailTemplate(index);
+function renderContactDesktop(contact) {
+  DOM.contactOverviewEl.innerHTML = contactDetailTemplate(contact);
   DOM.contactOverviewEl.classList.add("fade-in");
 }
 
 /**
  * Renders the contact details view for mobile by inserting the appropriate HTML template into the DOM and setting up event listeners for user interactions. This function is called when a contact is selected in the mobile view to display the contact's details in a fullscreen overlay.
- * @param {number} index - The index of the contact to render.
+ * @param {number} contact - The index of the contact to render.
  * @returns {void}
  */
-function renderContactMobile(index) {
+function renderContactMobile(contact) {
   DOM.fullscreenMobileEl.innerHTML =
     contactMainTemplate() +
-    contactMobileButton(index) +
+    contactMobileButton(contact) +
     contactCloseDetailViewButton();
 
   DOM.mobileMenuEl = document.getElementById("mobile-menu");
@@ -175,7 +167,7 @@ function renderContactMobile(index) {
   const mobileOverviewEl =
     DOM.fullscreenMobileEl.querySelector("#contact-overview");
 
-  mobileOverviewEl.innerHTML = contactDetailTemplate(index);
+  mobileOverviewEl.innerHTML = contactDetailTemplate(contact);
   mobileOverviewEl.classList.add("fade-in");
 
   DOM.contactsListEl.classList.add("hide-mobile");
@@ -239,12 +231,13 @@ function renderToastMessage(type) {
 
 /**
  * Toggles the active contact in the desktop view by updating the CSS classes of the contact elements and rendering the contact details in the overview section. If the same contact is clicked again, it will be deselected and the overview will be cleared.
- * @param {number} index - The index of the contact to toggle.
+ * @param {number} firebaseKey - The index of the contact to toggle.
  * @returns {void}
  */
-function toggleActiveContact(index) {
+function toggleActiveContact(firebaseKey) {
   const currentActiveElement = document.querySelector(".active-contact");
-  const newActiveElement = document.getElementById("contact" + index);
+  const newActiveElement = document.getElementById("contact" + firebaseKey);
+  if (!newActiveElement) return;
   if (DOM.contactOverviewEl) {
     DOM.contactOverviewEl.classList.remove("fade-in");
   }
@@ -253,7 +246,7 @@ function toggleActiveContact(index) {
       currentActiveElement.classList.remove("active-contact");
     }
     newActiveElement.classList.add("active-contact");
-    renderContact(index);
+    renderContact(firebaseKey);
     return;
   }
   if (currentActiveElement) {
@@ -264,7 +257,7 @@ function toggleActiveContact(index) {
     newActiveElement.classList.remove("active-contact");
   } else {
     newActiveElement.classList.add("active-contact");
-    renderContact(index);
+    renderContact(firebaseKey);
   }
 }
 
@@ -361,11 +354,17 @@ async function addContact() {
     phone: phone,
     badgeColor: getRandomColor(),
   };
-  const result = await postData("contacts", newContact);
+  let result;
+  try {
+    result = await postData("contacts", newContact);
+  } catch (error) {
+    console.error("Error adding contact:", error);
+    return;
+  }
   newContact.firebaseKey = result.name;
   contacts.push(newContact);
   renderContactsList();
-  renderContact(findContactIndex(newContact.firebaseKey));
+  renderContact(newContact.firebaseKey);
   clearInputs();
   closeDialog();
   renderToastMessage("created");
@@ -373,21 +372,22 @@ async function addContact() {
 
 /**
  * Opens the dialog for editing an existing contact by setting up the dialog elements and event listeners.
- * @param {number} index - The index of the contact to edit.
+ * @param {number} firebaseKey - The index of the contact to edit.
  * @returns {void}
  */
-function openEditContact(index) {
+function openEditContact(firebaseKey) {
+  const contact = findContact(firebaseKey);
+  if (!contact) return;
   clearInputs();
   DOM.headlineEl.innerHTML = editContactHeadlineTemplate();
   DOM.noButtonEl.innerHTML = "Delete";
-  DOM.noButtonEl.onclick = () => deleteContact(index);
+  DOM.noButtonEl.onclick = () => deleteContact(firebaseKey);
   DOM.okButtonEl.innerHTML = `Save&nbsp;${checkIcon()}`;
-  DOM.okButtonEl.onclick = () => saveEditedContact(index);
-  DOM.personImageEl.innerHTML = contactBadgeTemplate(index);
-  DOM.contactNameEl.value =
-    contacts[index].firstName + " " + contacts[index].lastName;
-  DOM.contactEmailEl.value = contacts[index].email;
-  DOM.contactPhoneEl.value = contacts[index].phone;
+  DOM.okButtonEl.onclick = () => saveEditedContact(firebaseKey);
+  DOM.personImageEl.innerHTML = contactBadgeTemplate(contact);
+  DOM.contactNameEl.value = contact.firstName + " " + contact.lastName;
+  DOM.contactEmailEl.value = contact.email;
+  DOM.contactPhoneEl.value = contact.phone;
   openDialog();
 }
 
@@ -396,31 +396,40 @@ function openEditContact(index) {
  * @param {number} index - The index of the contact to save.
  * @returns {Promise<void>}
  */
-async function saveEditedContact(index) {
+async function saveEditedContact(firebaseKey) {
+  const contact = findContact(firebaseKey);
   if (!validateForm()) return;
   const contactName = splitName(DOM.contactNameEl.value);
   if (!contactName) return;
-  const contact = contacts[index];
   contact.firstName = contactName.firstName;
   contact.lastName = contactName.lastName;
   contact.email = DOM.contactEmailEl.value;
   contact.phone = DOM.contactPhoneEl.value;
-  const firebaseKey = contact.firebaseKey;
-  await updateContact(contact);
+  try {
+    await updateContact(firebaseKey);
+  } catch (error) {
+    console.error("Error updating contact:", error);
+    return;
+  }
   renderContactsList();
-  renderContact(findContactIndex(firebaseKey));
+  renderContact(firebaseKey);
   closeDialog();
   renderToastMessage("edited");
 }
 
 /**
  * Deletes a contact by removing it from the backend and updating the contacts list and overview. It also provides feedback to the user through a toast message and closes the dialog after the operation is completed.
- * @param {number} index - The index of the contact to delete.
+ * @param {number} firebaseKey - The firebaseKey of the contact to delete.
  * @returns {Promise<void>}
  */
-async function deleteContact(index) {
-  const contact = contacts[index];
-  await deleteData("contacts", contact.firebaseKey);
+async function deleteContact(firebaseKey) {
+  const contact = findContact(firebaseKey);
+  try {
+    await deleteData("contacts", contact.firebaseKey);
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+    return;
+  }
   contacts.splice(findContactIndex(contact.firebaseKey), 1);
   DOM.contactOverviewEl.innerHTML = "";
   DOM.contactOverviewEl.classList.remove("fade-in");
@@ -435,7 +444,8 @@ async function deleteContact(index) {
  * @param {Object} contact - The contact object containing the updated contact information.
  * @returns {Promise<void>}
  */
-async function updateContact(contact) {
+async function updateContact(firebaseKey) {
+  const contact = findContact(firebaseKey);
   const firstName = contact.firstName;
   const lastName = contact.lastName;
   const email = contact.email;
@@ -528,16 +538,20 @@ function clearInputs() {
   DOM.warningMessagePhoneEl.innerHTML = "";
 }
 
-/**
- * Finds the index of a contact in the contacts array by its Firebase key.
- * @param {string} firebaseKey - The Firebase key of the contact to find.
- * @returns {number} - The index of the contact in the contacts array, or -1 if not found.
+/** Finds a contact by its firebaseKey by searching through the contacts array and returning the contact object that matches the provided firebaseKey. If no contact is found, it returns undefined.
+ * @param {string} firebaseKey - The firebaseKey of the contact to find.
+ * @returns {Object|undefined} - The contact object that matches the firebaseKey, or undefined if no contact is found.
+ */
+function findContact(firebaseKey) {
+  return contacts.find((contact) => contact.firebaseKey === firebaseKey);
+}
+
+/** Finds the index of a contact in the contacts array by its firebaseKey. It searches through the contacts array and returns the index of the contact that matches the provided firebaseKey. If no contact is found, it returns -1.
+ * @param {string} firebaseKey - The firebaseKey of the contact to find.
+ * @returns {number} - The index of the contact that matches the firebaseKey, or -1 if no contact is found.
  */
 function findContactIndex(firebaseKey) {
-  let index = contacts.findIndex(
-    (contact) => contact.firebaseKey === firebaseKey,
-  );
-  return index;
+  return contacts.findIndex((contact) => contact.firebaseKey === firebaseKey);
 }
 
 /**
