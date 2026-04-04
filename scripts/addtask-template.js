@@ -37,22 +37,6 @@ function buildEditSubtaskHTML(index) {
     `;
 }
 
-function buildAssignedContactOptionHTML(index) {
-  let initials = getContactInitials(contacts[index]);
-  let fullName = contacts[index].firstName + " " + contacts[index].lastName;
-  let badgeColor = contacts[index].badgeColor;
-  let contactId = contacts[index].firebaseKey;
-  return `
-    <div class="select-option" data-id="${contactId}">
-        <div class="contact-info">
-            <div class="avatar" style="background:${badgeColor}">${initials}</div>
-            <span>${fullName}</span>
-        </div>
-        <input type="checkbox">
-    </div>
-    `;
-}
-
 function addTaskTemplate() {
   return `
       <div class="add-task-modal" onclick="event.stopPropagation()">
@@ -96,22 +80,33 @@ function addTaskTemplate() {
               </div>
 
               <div class="field">
-                <label class="label" for="due">
+                <label class="label" for="due-date">
                   Due date<span class="req">*</span>
                 </label>
 
-                <div class="date-input-wrapper">
-                  <input
-                    id="due"
-                    class="input date-input"
-                    type="date"
-                    ondblclick="setTodayDate()"
-                    onkeydown="return false"
-                  />
-                  <img src="../assets/imgs/event.png" onclick="openDatePicker('due')" />
-                </div>
+                <div class="addtask-due-date-container">
+                  <div class="addtask-due-input-wrapper">
+                    <input
+                      type="text"
+                      id="due-date"
+                      class="input addtask-due-input"
+                      placeholder="dd/mm/yyyy"
+                      oninput="syncPickerFromInput()"
+                    />
+                    <input
+                      type="date"
+                      id="due-date-picker"
+                      class="addtask-due-picker"
+                      onchange="syncDateFromPicker()"
+                      tabindex="-1"
+                    />
+                    <button type="button" class="addtask-due-picker-btn" onclick="openEditDatePicker()">
+                      <img src="../assets/imgs/event.png" alt="date picker icon" />
+                    </button>
+                  </div>
 
-                <p class="error-msg" id="dueError">This field is required</p>
+                  <p class="addtask-due-feedback" id="dueDateFeedback">this field is required</p>
+                </div>
               </div>
             </div>
 

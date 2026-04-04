@@ -1,3 +1,13 @@
+/**
+ * Generates the HTML markup for the task edit dialog.
+ * @param {Object} task - The task being edited.
+ * @param {string} task.firebaseKey - Unique task ID.
+ * @param {string} task.title - Task title.
+ * @param {string} task.description - Task description.
+ * @param {string} task.due_date - Task due date in YYYY-MM-DD format.
+ * @param {string} task.priority - Task priority key.
+ * @returns {string} The edit dialog HTML string.
+ */
 function editTaskTemplate(task) {
   return `<div
           class="task-card-detail edit-dialog"
@@ -39,17 +49,17 @@ function editTaskTemplate(task) {
       <input
         type="text"
         id="due-date"
-        value="${formatEditDateForDisplay(task.due_date)}"
+        value="${formatDateForDisplay(task.due_date)}"
         class="input edit-input"
         placeholder="dd/mm/yyyy"
-        oninput="syncEditPickerFromInput()"
+        oninput="syncPickerFromInput()"
       />
       <input
         type="date"
         id="due-date-picker"
         class="edit-date-picker"
         value="${task.due_date}"
-        onchange="syncEditDateFromPicker()"
+        onchange="syncDateFromPicker()"
         tabindex="-1"
       />
       <button type="button" class="date-picker-btn" onclick="openEditDatePicker()">
@@ -141,27 +151,4 @@ function editTaskTemplate(task) {
             </button>
           </div>
         </div>`;
-}
-
-function buildEditAssignedContactOptionHTML(index) {
-  let contact = contacts[index];
-  let fullName = contact.firstName + " " + contact.lastName;
-  let contactId = contact.firebaseKey;
-  let isSelected = isAssignedContactSelected(contactId);
-  return `
-    <div class="select-option${getAssignedOptionClass(isSelected)}" data-id="${contactId}">
-        <div class="contact-info">
-            <div class="avatar" style="background:${contact.badgeColor}">${getContactInitials(contact)}</div>
-            <span>${fullName}</span>
-        </div>
-        <input type="checkbox"${getAssignedCheckboxState(isSelected)}>
-    </div>
-    `;
-}
-
-function getEditPriorityActiveClass(taskPriority, buttonPriority) {
-  if (taskPriority === buttonPriority) {
-    return "is-active";
-  }
-  return "";
 }
