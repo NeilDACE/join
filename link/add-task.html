@@ -87,26 +87,41 @@
           <a href="./legal-notice.html">Legal notice</a>
         </div>
       </nav>
-    </aside>
+    </header>
 
-    <main>
-      <header>
-        <img
-          src="../assets/imgs/join-logo.png"
-          alt="logo"
-          class="logo-mobile"
-        />
-        <p class="headline">Kanban Project Management Tool</p>
-        <nav class="header-nav">
-          <button class="button help-button">
-            <a href="./help-desk.html"
-              ><img src="../assets/imgs/help.png" alt="search"
-            /></a>
-          </button>
-          <div class="profile-wrapper">
-            <button id="profile-button" class="button profile-button">
-              SM
-            </button>
+    <section class="addtask">
+      <h1 class="addtask-title">Add Task</h1>
+      <form class="addtask-form">
+        <div class="addtask-col">
+          <div class="field">
+            <label class="label" for="title">
+              Title<span class="req">*</span>
+            </label>
+
+            <input id="title" class="input" type="text" placeholder="Enter a title" maxlength="20" />
+            <p class="error-msg" id="titleError">This field is required</p>
+          </div>
+        </nav>
+      </header>
+
+      <section class="addtask">
+        <h1 class="addtask-title">Add Task</h1>
+        <form class="addtask-form">
+          <div class="addtask-col">
+            <div class="field">
+              <label class="label" for="title">
+                Title<span class="req">*</span>
+              </label>
+
+              <input
+                id="title"
+                class="input addtask-input"
+                type="text"
+                placeholder="Enter a title"
+                maxlength="20"
+              />
+              <p class="error-msg" id="titleError">This field is required</p>
+            </div>
 
             <div id="dropdown-container"></div>
           </div>
@@ -152,7 +167,7 @@
                   <input
                     type="text"
                     id="due-date"
-                    class="input addtask-due-input"
+                    class="input addtask-due-input addtask-input"
                     placeholder="dd/mm/yyyy"
                     maxlength="10"
                     oninput="syncPickerFromInput()"
@@ -329,6 +344,39 @@
             </div>
           </div>
         </form>
+
+        <div class="addtask-foot">
+          <p class="required-hint">
+            <span class="req">*</span> This field is required
+          </p>
+
+          <div class="addtask-actions">
+            <button type="button" class="secondary-btn">
+              Clear
+              <svg
+                class="icon icon-cancel"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12.0011 11.9998L17.2441 17.2428M6.75806 17.2428L12.0011 11.9998L6.75806 17.2428ZM17.2441 6.75684L12.0001 11.9998L17.2441 6.75684ZM12.0001 11.9998L6.75806 6.75684L12.0001 11.9998Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+
+            <button type="button" class="primary-btn">
+              Create Task
+              <img src="../assets/imgs/check.svg" alt="create" />
+            </button>
+          </div>
+        </div>
       </section>
     </main>
     <div id="taskAddedToast" class="task-toast">

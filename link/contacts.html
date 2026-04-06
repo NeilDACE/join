@@ -20,8 +20,23 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../styles/dropdown-menu.css" />
 
-  <link rel="stylesheet" href="../styles/contacts.css" />
-  <link rel="stylesheet" href="../styles/contacts-dialog.css" />
+    <script src="../scripts/contacts.js" defer></script>
+    <script src="../scripts/icons/icons.js" defer></script>
+    <script src="../scripts/config.js" defer></script>
+    <script src="../scripts/services.js" defer></script>
+    <script src="../scripts/database-operations.js" defer></script>
+    <script src="../scripts/helpers.js" defer></script>
+    <script src="../scripts/dropdown-menu.js" defer></script>
+    <script src="../scripts/auth/auth.js" defer></script>
+    <script src="../scripts/contactsConst.js" defer></script>
+    <script src="../scripts/contactsEvents.js" defer></script>
+    <script src="../scripts/dom/contactsDom.js" defer></script>
+    <script src="../scripts/services/contactsService.js" defer></script>
+    <script src="../scripts/ui/contactsDialog.js" defer></script>
+    <script src="../scripts/ui/contactsUI.js" defer></script>
+    <script src="../scripts/utils/contactsValidation.js" defer></script>
+    <script src="../scripts/ui/contactsTemplates.js" defer></script>
+  </head>
 
   <script src="../scripts/contacts.js" defer></script>
   <script src="../scripts/contactsTemplates.js" defer></script>
@@ -73,7 +88,15 @@
           <div id="dropdown-container"></div>
         </div>
       </nav>
-    </header>
+    </aside>
+
+    <main>
+      <header>
+        <img
+          src="../assets/imgs/join-logo.png"
+          alt="join logo"
+          class="logo-mobile"
+        />
 
     <section class="contacts-section">
       <div class="fullscreen-mobile hide-mobile" id="fullscreen-mobile"></div>
@@ -82,7 +105,8 @@
           <button class="primary-btn add-contact-button" onclick="openAddNewContact()">
             <img src="../assets/imgs/person-add.png" alt="Add new contact symbol" />
           </button>
-        </div>
+          <div class="profile-wrapper" id="profile-wrapper">
+            <button id="profile-button" class="button profile-button"></button>
 
         <div class="contacts-list" id="contacts-list"></div>
       </aside>
