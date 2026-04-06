@@ -87,23 +87,30 @@
           <a href="./legal-notice.html">Legal notice</a>
         </div>
       </nav>
-    </header>
+    </aside>
+    <main>
+      <header>
+        <img
+          src="../assets/imgs/join-logo.png"
+          alt="logo"
+          class="logo-mobile"
+        />
+        <p class="headline">Kanban Project Management Tool</p>
+        <nav class="header-nav">
+          <button class="button help-button">
+            <a href="./help-desk.html"
+              ><img src="../assets/imgs/help.png" alt="search"
+            /></a>
+          </button>
+          <div class="profile-wrapper">
+            <button id="profile-button" class="button profile-button">
+              SM
+            </button>
 
-    <section class="addtask">
-      <h1 class="addtask-title">Add Task</h1>
-      <form class="addtask-form">
-        <div class="addtask-col">
-          <div class="field">
-            <label class="label" for="title">
-              Title<span class="req">*</span>
-            </label>
-
-            <input id="title" class="input" type="text" placeholder="Enter a title" maxlength="20" />
-            <p class="error-msg" id="titleError">This field is required</p>
+            <div id="dropdown-container"></div>
           </div>
         </nav>
       </header>
-
       <section class="addtask">
         <h1 class="addtask-title">Add Task</h1>
         <form class="addtask-form">
@@ -116,30 +123,6 @@
               <input
                 id="title"
                 class="input addtask-input"
-                type="text"
-                placeholder="Enter a title"
-                maxlength="20"
-              />
-              <p class="error-msg" id="titleError">This field is required</p>
-            </div>
-
-            <div id="dropdown-container"></div>
-          </div>
-        </nav>
-      </header>
-
-      <section class="addtask">
-        <h1 class="addtask-title">Add Task</h1>
-        <form class="addtask-form">
-          <div class="addtask-col">
-            <div class="field">
-              <label class="label" for="title">
-                Title<span class="req">*</span>
-              </label>
-
-              <input
-                id="title"
-                class="input"
                 type="text"
                 placeholder="Enter a title"
                 maxlength="40"
@@ -200,31 +183,33 @@
           <div class="addtask-divider"></div>
 
           <div class="addtask-col">
-            <label class="label" for="assignedSelect">Priority</label>
             <div class="prio-row">
-              <button type="button" class="prio-btn prio-urgent">
-                Urgent
-                <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 14l5-5 5 5" />
-                  <path d="M7 19l5-5 5 5" />
-                </svg>
-              </button>
+              <label class="label" for="assignedSelect">Priority</label>
+              <div class="prio-buttons">
+                <button type="button" class="prio-btn prio-urgent">
+                  Urgent
+                  <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 14l5-5 5 5" />
+                    <path d="M7 19l5-5 5 5" />
+                  </svg>
+                </button>
 
-              <button type="button" class="prio-btn prio-medium is-active">
-                Medium
-                <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 10h10" />
-                  <path d="M7 14h10" />
-                </svg>
-              </button>
+                <button type="button" class="prio-btn prio-medium is-active">
+                  Medium
+                  <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10h10" />
+                    <path d="M7 14h10" />
+                  </svg>
+                </button>
 
-              <button type="button" class="prio-btn prio-low">
-                Low
-                <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 10l5 5 5-5" />
-                  <path d="M7 5l5 5 5-5" />
-                </svg>
-              </button>
+                <button type="button" class="prio-btn prio-low">
+                  Low
+                  <svg class="prio-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5" />
+                    <path d="M7 5l5 5 5-5" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <div class="field">
@@ -309,39 +294,6 @@
             </div>
 
             <div class="subtasks-list" id="subtasksList"></div>
-          </div>
-
-          <div class="addtask-foot">
-            <p class="required-hint">
-              <span class="req">*</span> This field is required
-            </p>
-
-            <div class="addtask-actions">
-              <button type="button" class="secondary-btn">
-                Clear
-                <svg
-                  class="icon icon-cancel"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M12.0011 11.9998L17.2441 17.2428M6.75806 17.2428L12.0011 11.9998L6.75806 17.2428ZM17.2441 6.75684L12.0001 11.9998L17.2441 6.75684ZM12.0001 11.9998L6.75806 6.75684L12.0001 11.9998Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-
-              <button type="button" class="primary-btn">
-                Create Task
-                <img src="../assets/imgs/check.svg" alt="create" />
-              </button>
-            </div>
           </div>
         </form>
 
