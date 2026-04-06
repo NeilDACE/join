@@ -1,7 +1,3 @@
-body {
-  margin: 0;
-}
-
 .addtask-page {
   display: flex;
   width: 100%;
@@ -438,7 +434,6 @@ textarea::placeholder {
   visibility: hidden;
 }
 
-
 .subtask-input {
   position: relative;
 }
@@ -571,9 +566,7 @@ textarea::placeholder {
   height: 24px;
   transition: 0.1s ease;
   background: transparent;
-  border: none;
   padding: 0;
-  cursor: pointer;
 }
 
 .subtask-btn:hover {
