@@ -102,11 +102,9 @@
         />
         <p class="headline">Kanban Project Management Tool</p>
         <nav class="header-nav">
-          <button class="button help-button">
-            <a href="./help-desk.html"
-              ><img src="../assets/imgs/help.png" alt="search"
-            /></a>
-          </button>
+          <a class="button help-button" href="./help-desk.html"
+            ><img src="../assets/imgs/help.png" alt="search"
+          /></a>
           <div class="profile-wrapper">
             <button id="profile-button" class="button profile-button">
               SM
@@ -121,9 +119,7 @@
         <form class="addtask-form">
           <div class="addtask-col">
             <div class="field">
-              <label class="label" for="title">
-                Title<span class="req">*</span>
-              </label>
+              <p class="label" for="title">Title<span class="req">*</span></p>
 
               <input
                 id="title"
@@ -136,7 +132,7 @@
             </div>
 
             <div class="field">
-              <label class="label" for="desc">Description</label>
+              <p class="label" for="desc">Description</p>
               <textarea
                 id="desc"
                 class="textarea"
@@ -147,9 +143,9 @@
             </div>
 
             <div class="field">
-              <label class="label" for="due-date">
+              <p class="label" for="due-date">
                 Due date<span class="req">*</span>
-              </label>
+              </p>
               <div class="addtask-due-date-container">
                 <div class="addtask-due-input-wrapper">
                   <input
@@ -189,7 +185,7 @@
 
           <div class="addtask-col">
             <div class="prio-row">
-              <label class="label" for="assignedSelect">Priority</label>
+              <p class="label" for="assignedSelect">Priority</p>
               <div class="prio-buttons">
                 <button type="button" class="prio-btn prio-urgent">
                   Urgent
@@ -218,7 +214,7 @@
             </div>
 
             <div class="field">
-              <label class="label" for="assignedSelect">Assigned to</label>
+              <p class="label" for="assignedSelect">Assigned to</p>
 
               <div class="custom-select" id="assignedSelect">
                 <div class="select-trigger">
@@ -237,9 +233,9 @@
             </div>
 
             <div class="field">
-              <label class="label" for="catSelect">
+              <p class="label" for="catSelect">
                 Category<span class="req">*</span>
-              </label>
+              </p>
 
               <div class="custom-select custom-select--single" id="catSelect">
                 <div class="select-trigger">
