@@ -160,7 +160,10 @@ form {
 }
 
 .footer-links {
+  position: fixed;
+  bottom: 40px;
   display: flex;
+
   gap: 30px;
   font-size: 14px;
   color: #888;
@@ -216,13 +219,14 @@ body.logo-early .login-logo {
 
 .required-warning {
   position: absolute;
+  left: 10px;
   color: red;
   font-size: 14px;
 }
 
 .checkbox-warning {
-  margin-top: 30px;
-  margin-right: 50px;
+  margin-top: 35px;
+  margin-right: 25px;
 }
 
 /* * {
