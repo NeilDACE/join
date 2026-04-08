@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-
     <link
       rel="icon"
       type="image/png"
@@ -41,7 +40,6 @@
       type="image/x-icon"
     />
     <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/variables.css" />
     <link rel="stylesheet" href="../styles/font.css" />
@@ -49,7 +47,6 @@
     <link rel="stylesheet" href="../styles/dropdown-menu.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
     <link rel="stylesheet" href="../styles/contacts-dialog.css" />
-
     <script src="../scripts/contacts.js" defer></script>
     <script src="../scripts/icons/icons.js" defer></script>
     <script src="../scripts/config.js" defer></script>
@@ -68,7 +65,6 @@
     <script src="../scripts/ui/templates/contacts-templates.js" defer></script>
     <script src="../scripts/ui/templates/dropdown-template.js"></script>
   </head>
-
   <body onload="init()">
     <aside>
       <img src="../assets/imgs/join-logo-white.png" alt="logo" class="logo" />
@@ -93,26 +89,30 @@
         </div>
       </nav>
     </aside>
-
     <main>
       <header>
-        <img
-          src="../assets/imgs/join-logo.png"
-          alt="logo"
-          class="logo-mobile"
-        />
-        <p class="headline">Kanban Project Management Tool</p>
-        <nav class="header-nav">
-          <a class="button help-button" href="./help-desk.html"
-            ><img src="../assets/imgs/help.png" alt="search"
-          /></a>
-          <div class="profile-wrapper">
-            <button id="profile-button" class="button profile-button"></button>
-            <div id="dropdown-container"></div>
-          </div>
-        </nav>
+        <div class="header-container">
+          <img
+            src="../assets/imgs/join-logo.png"
+            alt="logo"
+            class="logo-mobile"
+          />
+          <p class="headline">Kanban Project Management Tool</p>
+          <nav class="header-nav">
+            <a class="button help-button" href="./help-desk.html"
+              ><img src="../assets/imgs/help.png" alt="search"
+            /></a>
+            <div class="profile-wrapper">
+              <button
+                id="profile-button"
+                class="button profile-button"
+              ></button>
+              <div id="dropdown-container"></div>
+            </div>
+          </nav>
+        </div>
       </header>
-      <section class="contacts-section">
+      <section class="contacts-section max-width-1208">
         <div class="fullscreen-mobile hide-mobile" id="fullscreen-mobile"></div>
         <aside class="contacts" id="screen-desktop">
           <div class="add-contact">
@@ -128,7 +128,6 @@
           </div>
           <div class="contacts-list" id="contacts-list"></div>
         </aside>
-
         <div
           class="contact-overview-container"
           id="contact-overview-container"

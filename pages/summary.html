@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-
     <link
       rel="icon"
       type="image/png"
@@ -88,27 +87,28 @@
 
     <main>
       <header>
-        <img
-          src="../assets/imgs/join-logo.png"
-          alt="logo"
-          class="logo-mobile"
-        />
-        <p class="headline">Kanban Project Management Tool</p>
-        <nav class="header-nav">
-          <a class="button help-button" href="./help-desk.html"
-            ><img src="../assets/imgs/help.png" alt="search"
-          /></a>
-          <div class="profile-wrapper">
-            <button id="profile-button" class="button profile-button">
-              SM
-            </button>
-
-            <div id="dropdown-container"></div>
-          </div>
-        </nav>
+        <div class="header-container">
+          <img
+            src="../assets/imgs/join-logo.png"
+            alt="logo"
+            class="logo-mobile"
+          />
+          <p class="headline">Kanban Project Management Tool</p>
+          <nav class="header-nav">
+            <a class="button help-button" href="./help-desk.html"
+              ><img src="../assets/imgs/help.png" alt="search"
+            /></a>
+            <div class="profile-wrapper">
+              <button
+                id="profile-button"
+                class="button profile-button"
+              ></button>
+              <div id="dropdown-container"></div>
+            </div>
+          </nav>
+        </div>
       </header>
-
-      <section class="summary-section">
+      <section class="summary-section max-width-1208">
         <div class="summary-content">
           <div class="summary-title">
             <h1>Join 360</h1>
@@ -116,15 +116,14 @@
             <span class="summary-subtitle">Key Metrics at a Glance</span>
             <div class="bottom-line"></div>
           </div>
-
           <div class="summary-below-section">
             <div class="summary-container">
               <div class="card todo">
                 <div class="icon-wrapper">
                   <img
                     class="img-card"
-                    src="../assets/imgs/edit.png"
-                    alt="edit"
+                    src="../assets/imgs/edit-icon-summary.svg"
+                    alt="edit-icon-summary"
                   />
                 </div>
                 <div class="text-wrapper">
@@ -132,13 +131,12 @@
                   <span class="card-font">To-do</span>
                 </div>
               </div>
-
               <div class="card done">
                 <div class="icon-wrapper">
                   <img
                     class="img-card"
-                    src="../assets/imgs/check-white.svg"
-                    alt="check"
+                    src="../assets/imgs/check-icon-summary.svg"
+                    alt="check-icon-summary"
                   />
                 </div>
                 <div class="text-wrapper">
@@ -146,13 +144,12 @@
                   <span class="card-font">Done</span>
                 </div>
               </div>
-
               <div class="card priority">
                 <div class="icon-wrapper bg-prio">
                   <img
                     class="img-card"
                     src="../assets/imgs/prio-high-white.png"
-                    alt="priority high"
+                    alt="prio-urgent-icon"
                   />
                 </div>
                 <div class="text-wrapper">
@@ -165,23 +162,19 @@
                   <p class="deadline-text">Upcoming Deadline</p>
                 </div>
               </div>
-
               <div class="card board">
                 <span class="numbers" id="board-count">0</span>
                 <p class="task-text">Tasks in Board</p>
               </div>
-
               <div class="card progress">
                 <span class="numbers" id="progress-count">0</span>
                 <p class="task-text">Tasks in Progress</p>
               </div>
-
               <div class="card feedback">
                 <span class="numbers" id="feedback-count">0</span>
                 <p class="task-text">Awaiting Feedback</p>
               </div>
             </div>
-
             <div class="welcome-section">
               <h2>Good morning,</h2>
               <p class="user-name" id="user-name"></p>
