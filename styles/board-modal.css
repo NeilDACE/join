@@ -1,0 +1,300 @@
+.add-task-dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+}
+
+.add-task-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: 0.1s ease;
+}
+
+.add-task-dialog[open]::backdrop {
+  opacity: 1;
+}
+
+body.dialog-open {
+  overflow: hidden;
+}
+
+.add-task-modal {
+  height: 90vh;
+  max-height: 900px;
+  width: 100%;
+  max-width: 1161px;
+  border-radius: 30px;
+  background: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateX(150%);
+  padding: 24px 64px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 0.1s ease;
+}
+
+.add-task-modal.show {
+  transform: translate(-50%, -50%) translateX(0);
+}
+
+.add-task-modal.hide {
+  transform: translate(-50%, -50%) translateX(150%);
+}
+
+.add-task-close-btn {
+  position: absolute;
+  top: 64px;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #2a3647;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.add-task-close-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+#addTaskDialog .addtask,
+#addTaskDialog .addtask-form,
+#addTaskDialog .addtask-col,
+#addTaskDialog .field,
+#addTaskDialog .prio-row,
+#addTaskDialog .custom-select,
+#addTaskDialog .subtask-input {
+  min-width: 0;
+}
+
+#addTaskDialog .addtask {
+  width: 100%;
+  padding: 0;
+}
+
+#addTaskDialog .addtask-title {
+  margin: 0 0 24px;
+  color: #000;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#addTaskDialog .addtask-form {
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  gap: 32px;
+}
+
+#addTaskDialog .addtask-col {
+  gap: 18px;
+}
+
+#addTaskDialog .field {
+  gap: 8px;
+}
+
+#addTaskDialog .label {
+  font-size: 18px;
+}
+
+#addTaskDialog .input,
+#addTaskDialog .textarea,
+#addTaskDialog .select-trigger,
+#addTaskDialog .subtask-input .input {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 18px;
+}
+
+#addTaskDialog .input {
+  height: 44px;
+  padding: 10px 14px;
+}
+
+#addTaskDialog .textarea {
+  min-height: 100px;
+  padding: 10px 14px;
+}
+
+#addTaskDialog .custom-select {
+  position: relative;
+  width: 100%;
+}
+
+#addTaskDialog .select-trigger {
+  min-height: 44px;
+  padding: 10px 14px;
+}
+
+#addTaskDialog .trigger-text {
+  font-size: 18px;
+}
+
+#addTaskDialog .select-dropdown {
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+#addTaskDialog .prio-row {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+#addTaskDialog .prio-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px 14px;
+  font-size: 18px;
+  gap: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#addTaskDialog .prio-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+#addTaskDialog .subtask-input .input {
+  height: 44px;
+}
+
+#addTaskDialog .addtask-foot {
+  margin-top: 20px;
+  padding-top: 8px;
+}
+
+#addTaskDialog .required-hint {
+  font-size: 14px;
+}
+
+#addTaskDialog .addtask-actions {
+  gap: 12px;
+}
+
+#addTaskDialog .secondary-btn,
+#addTaskDialog .primary-btn {
+  height: 48px;
+  font-size: 18px;
+  padding: 0 20px;
+}
+
+#addTaskDialog .date-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#addTaskDialog .date-picker-trigger {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+#addTaskDialog .date-icon-right {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+#addTaskDialog .icon-date-picker {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+}
+
+#addTaskDialog input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#addTaskDialog .date-input-wrapper img {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.template-container {
+  padding: 0px;
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+.template-foot {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1160px) {
+  .add-task-modal {
+    max-height: 855px;
+    width: 100%;
+    padding: 32px;
+  }
+}
+
+@media (max-width: 851px) {
+  .add-task-modal {
+    height: 90vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .template-container {
+    padding-top: 16px;
+    padding-right: 8px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .add-task-close-btn {
+    top: 16px;
+    right: 16px;
+  }
+
+  .add-task-modal {
+    padding-top: 16px;
+    padding-right: 8px;
+    padding-left: 16px;
+    padding-bottom: 16px;
+  }
+
+  .add-task-close-btn {
+    top: 32px;
+    right: 32px;
+  }
+
+  .template-actions {
+    padding-top: 16px;
+    padding-bottom: 40px;
+  }
+}
